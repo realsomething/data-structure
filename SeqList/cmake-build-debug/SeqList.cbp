@@ -80,6 +80,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/sky/work/practice/clion/data-structure/SeqList/SeqList.h">
+			<Option target="SeqList"/>
+		</Unit>
 		<Unit filename="/Users/sky/work/practice/clion/data-structure/SeqList/main.cpp">
 			<Option target="SeqList"/>
 		</Unit>

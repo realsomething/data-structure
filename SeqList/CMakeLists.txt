@@ -3,5 +3,5 @@ project(SeqList)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp SeqList.h)
 add_executable(SeqList ${SOURCE_FILES})

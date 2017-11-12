@@ -17,8 +17,14 @@
 *.zip
 *.tar.gz
 *.rar
-.idea
-cmake-build-debug
+*.cbp
+
+cmake_install.cmake
+CMakeCache.txt
+
+.idea/
+cmake-build-debug/
+CMakeFiles/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
