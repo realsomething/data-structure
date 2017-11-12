@@ -22,6 +22,15 @@ public:
         size = 0;
     }
 
+    // preset some data
+    void ListPreset()
+    {
+        for (int i=0; i<10; i++)
+        {
+            ListInsert(i, rand() % 100);
+        }
+    }
+
     // insert x before i,    0 <= i <= L->size
     bool ListInsert( int i, DataType x)
     {
@@ -50,7 +59,7 @@ public:
     }
 
     // delete x from i,     0 <= i <= L->size - 1
-    bool ListDelete(int i, DataType *x)
+    bool ListDelete(int i, DataType &x)
     {
         if (size == 0)
         {
@@ -64,7 +73,7 @@ public:
         }
         else
         {
-            *x = list[i];
+            x = list[i];
 
             for (int j=i+1; j<size; j++)
             {

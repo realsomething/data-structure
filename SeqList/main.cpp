@@ -8,23 +8,22 @@ typedef int DataType;
 #include "SeqList.h"
 
 int main() {
-    SeqList *seqList = new SeqList();
-
-    seqList->ListInitiate();
-
-    for (int i=0; i<10; i++)
-    {
-        seqList->ListInsert(i, rand() % 100);
-    }
-
-    seqList->ListPrint();
-
+    SeqList seqList = SeqList();
     DataType  x = 0;
-    seqList->ListDelete(0, &x);                         // delete the first
-    seqList->ListPrint();
 
-    seqList->ListDelete(seqList->ListSize()-1, &x);     // delete the last
-    seqList->ListPrint();
-    
+    seqList.ListInitiate();
+
+    seqList.ListPreset();
+
+    seqList.ListPrint();
+
+    seqList.ListDelete(0, x);                           // delete the first
+    cout << "x = " + x << endl;
+
+    seqList.ListDelete(seqList.ListSize()-1, x);        // delete the last
+    cout << "x = " + x << endl;
+
+    seqList.ListPrint();
+
     return 0;
 }
