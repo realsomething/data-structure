@@ -162,4 +162,61 @@ public:
         cout << endl;
     }
 
+    void destroy_linklist(SLinkList list)
+    {
+        Node *p = list.head;
+        Node *q = list.head;
+
+        while (p != NULL)
+        {
+            q = p;
+            p = p->next;
+            delete  q;//free(q);
+        }
+    }
+
+
+    // reverse the single link list
+    bool reverse_linklist()
+    {
+        SLinkList new_list;
+        Node *p;
+        Node *temp;
+
+        if (head->next == NULL)
+        {
+            cout << "the original link list is empty." << endl;
+            return false;
+        }
+
+        new_list = SLinkList();
+
+        if (new_list.head == NULL)
+        {
+            cout << "create the new link list failed." << endl;
+            return false;
+        }
+
+        p = head;
+
+        while (head->next != NULL)
+        {
+            temp = new_list.head->next;
+            new_list.head->next = head->next;
+            head->next = head->next->next;
+            new_list.head->next = temp;
+        }
+
+        //destroy_linklist(list);
+        // just need free original link list head node
+        //delete head;
+
+        p->next = new_list.head->next;
+
+        new_list.head->next = NULL;
+        delete new_list.head;
+
+        return true;
+    }
+
 };
