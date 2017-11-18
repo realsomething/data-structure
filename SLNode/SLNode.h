@@ -34,7 +34,8 @@ public:
 
     SLinkList()
     {
-        head = new Node();      // with head node
+        head = new Node();      // with head node, also means deep copy
+        size = 0;
     }
 
     virtual ~SLinkList()
@@ -160,6 +161,59 @@ public:
         }
 
         cout << endl;
+    }
+
+    void destroy_linklist(SLinkList list)
+    {
+        Node *p = list.head;
+        Node *q = list.head;
+
+        while (p != NULL)
+        {
+            q = p;
+            p = p->next;
+            delete  q;//free(q);
+        }
+    }
+
+
+    // reverse the single link list
+    bool reverse_linklist()
+    {
+        SLinkList new_list;
+        Node *p = head;
+        Node *temp;
+
+        if (head->next == NULL)
+        {
+            cout << "the original link list is empty." << endl;
+            return false;
+        }
+
+        new_list = SLinkList();
+
+        if (new_list.head == NULL)
+        {
+            cout << "create the new link list failed." << endl;
+            return false;
+        }
+
+        while (head->next != NULL)
+        {
+            temp = new_list.head->next;
+            new_list.head->next = head->next;
+            head->next = head->next->next;
+            new_list.head->next->next = temp;
+        }
+
+
+        p->next = new_list.head->next;
+
+        new_list.head->next = NULL;
+
+        //delete new_list.head;
+
+        return true;
     }
 
 };
