@@ -38,10 +38,10 @@ public:
         size = 0;
     }
 
-    virtual ~SLinkList()
+    virtual ~SLinkList()    // new list with one node, call this function error: SLNode(10166,0x7fffd367f3c0) malloc: *** error for object 0x7f8c7ec02600: pointer being freed was not allocated
     {
         Node *p = head;
-        Node *q = head;
+        Node *q;
 
         while (p != NULL)
         {
@@ -207,9 +207,9 @@ public:
         }
 
 
-        p->next = new_list.head->next;
+        p->next = new_list.head->next;  // link to the original link list
 
-        new_list.head->next = NULL;
+        new_list.head->next = NULL;     // break to the new link list
 
         //delete new_list.head;
 
