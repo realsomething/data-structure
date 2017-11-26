@@ -9,8 +9,6 @@
 
 
 
-
-
 struct Node
 {
     DataType data;
@@ -40,7 +38,7 @@ public:
     }
 
     virtual ~BiTree() {
-        Node *p = NULL;
+        Destroy(&root);
     }
 
     Node* GetRoot()
@@ -158,6 +156,161 @@ public:
     static void Visit(DataType item)
     {
         cout << '\t' << item;
+    }
+
+
+    bool PreOrderNotRecursion(Node* root, void Visit(DataType x))
+    {
+        if (root == NULL)
+        {
+            cout << "current node is null." << endl;
+            return false;
+        }
+
+        stack<Node*> s;
+        Node *p = NULL;
+
+        // root node push
+        s.push(root);
+
+        while (!s.empty())
+        {
+            p = s.top();
+            Visit(p->data);
+            s.pop();            // root node pop
+
+            if (p->right != NULL)
+            {
+                s.push(p->right);       // right tree push
+            }
+
+            if (p->left != NULL)
+            {
+                s.push(p->left);        // left tree push
+            }
+        }
+
+        cout << endl << "preorder not recursion success." << endl;
+        return true;
+    }
+
+    bool InOrderNotRecursion(Node* root, void Visit(DataType x))
+    {
+        if (root == NULL)
+        {
+            cout << "current node is null." << endl;
+            return false;
+        }
+
+        stack<Node*> s;
+        Node *p = root;
+
+        while (p != NULL /*first enter condition*/ || !s.empty()/*last node exit condition*/)
+        {
+            while (p != NULL)
+            {
+                s.push(p);
+                p = p->left;
+            }
+
+            p = s.top();
+            Visit(p->data);
+            s.pop();
+
+            if (p->right == NULL)
+            {
+                p = NULL;
+            }
+            else
+            {
+                p = p->right;
+            }
+        }
+
+        cout << endl << "inorder not recursion success." << endl;
+        return true;
+    }
+
+    bool PostOrderNotRecursion(Node* root, void Visit(DataType x))
+    {
+        if (root == NULL)
+        {
+            cout << "current node is null." << endl;
+            return false;
+        }
+
+        stack<Node*> s;
+        Node *p = root;
+        Node *visited = NULL;
+
+        while (p != NULL || !s.empty())
+        {
+            while (p != NULL)
+            {
+                s.push(p);
+                p = p->left;
+            }
+
+            p = s.top();
+
+            if (p->right == visited || p->right == NULL)
+            {
+                Visit(p->data);
+                s.pop();
+                visited = p;
+                p = NULL;
+            }
+            else
+            {
+                p = p->right;
+            }
+        }
+
+        cout << endl << "postorder not recursion success." << endl;
+        return true;
+    }
+
+
+
+    Node* SearchNodeByData(Node* current, DataType x)
+    {
+        Node *p = NULL;
+
+        if (current == NULL)
+        {
+            cout << "current node is null, search fail." << endl;
+            return NULL;
+        }
+
+        if (current->data == x)
+        {
+            cout << "current node matches: " << x << endl;
+            return current;
+        }
+
+        if (current->left != NULL)
+        {
+            p = SearchNodeByData(current->left, x);
+
+            if (p != NULL)
+            {
+                cout << "here just end the left recursion." << endl;
+                return p;
+            }
+        }
+
+        if (current->right != NULL)
+        {
+            p = SearchNodeByData(current->right, x);
+
+            if (p != NULL)
+            {
+                cout << "here just end the right recursion." << endl;
+                return p;
+            }
+        }
+
+        return NULL;
     }
 
 };

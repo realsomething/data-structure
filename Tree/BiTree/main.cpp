@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+#include <stack>
+
 typedef char DataType;
 
 #include "BiTree.h"
@@ -32,6 +34,13 @@ int main() {
     biTree.PreOrder(biTree.GetRoot()->left, biTree.Visit);  cout << endl;
     biTree.InOrder(biTree.GetRoot()->left, biTree.Visit);   cout << endl;
     biTree.PostOrder(biTree.GetRoot()->left, biTree.Visit); cout << endl;
+
+    biTree.SearchNodeByData(biTree.GetRoot(), 'C');
+    biTree.SearchNodeByData(biTree.GetRoot(), 'H');
+
+    biTree.PreOrderNotRecursion(biTree.GetRoot()->left, biTree.Visit);
+    biTree.InOrderNotRecursion(biTree.GetRoot()->left, biTree.Visit);
+    biTree.PostOrderNotRecursion(biTree.GetRoot()->left, biTree.Visit);
 
 
     return 0;
