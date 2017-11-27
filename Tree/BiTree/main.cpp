@@ -2,6 +2,8 @@
 using namespace std;
 
 #include <stack>
+#include <queue>
+#include <math.h>
 
 typedef char DataType;
 
@@ -31,17 +33,28 @@ int main() {
     biTree.InsertLeftNode(p, 'E');
     biTree.InsertRightNode(p1, 'F');
 
+    biTree.PrintTree(biTree.GetRoot()->left, 0);
+    biTree.GetTreeLevel(biTree.GetRoot());
+
     biTree.PreOrder(biTree.GetRoot()->left, biTree.Visit);  cout << endl;
     biTree.InOrder(biTree.GetRoot()->left, biTree.Visit);   cout << endl;
     biTree.PostOrder(biTree.GetRoot()->left, biTree.Visit); cout << endl;
-
-    biTree.SearchNodeByData(biTree.GetRoot(), 'C');
-    biTree.SearchNodeByData(biTree.GetRoot(), 'H');
 
     biTree.PreOrderNotRecursion(biTree.GetRoot()->left, biTree.Visit);
     biTree.InOrderNotRecursion(biTree.GetRoot()->left, biTree.Visit);
     biTree.PostOrderNotRecursion(biTree.GetRoot()->left, biTree.Visit);
 
+    biTree.LevelOrderTraverse(biTree.GetRoot()->left, biTree.Visit);
+
+    p = biTree.SearchNodeByData(biTree.GetRoot(), 'B');
+    biTree.DeleteLeftTree(p);
+    biTree.PreOrder(biTree.GetRoot()->left, biTree.Visit);  cout << endl;
+
+    p = biTree.SearchNodeByData(biTree.GetRoot(), 'C');
+    biTree.DeleteRightTree(p);
+    biTree.PreOrder(biTree.GetRoot()->left, biTree.Visit);  cout << endl;
+
+    biTree.PrintTree(biTree.GetRoot()->left, 0);
 
     return 0;
 }

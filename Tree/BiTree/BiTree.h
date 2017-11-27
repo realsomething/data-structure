@@ -158,6 +158,29 @@ public:
         cout << '\t' << item;
     }
 
+    void PrintTree(Node* root, int n)
+    {
+        if (root == NULL)
+        {
+            return;
+        }
+
+        PrintTree(root->right, n+1);
+
+        for (int i=0; i<n; ++i)
+        {
+            cout << '\t';
+        }
+
+        if (n >=0)
+        {
+            cout << "----";
+            cout << root->data << endl;
+        }
+
+        PrintTree(root->left, n+1);
+    }
+
 
     bool PreOrderNotRecursion(Node* root, void Visit(DataType x))
     {
@@ -177,7 +200,7 @@ public:
         {
             p = s.top();
             Visit(p->data);
-            s.pop();            // root node pop
+            s.pop();                    // root node pop
 
             if (p->right != NULL)
             {
@@ -270,7 +293,103 @@ public:
         return true;
     }
 
+    bool LevelOrderTraverse(Node* root, void Visit(DataType x))
+    {
+        if (root == NULL)
+        {
+            cout << "current node is null." << endl;
+            return false;
+        }
 
+        queue<Node*> q;
+        Node *p = NULL;
+        q.push(root);
+
+        while (!q.empty())
+        {
+            p = q.front();
+            Visit(p->data);
+            q.pop();
+
+            if (p->left != NULL)
+            {
+                q.push(p->left);
+            }
+
+            if (p->right != NULL)
+            {
+                q.push(p->right);
+            }
+        }
+
+        cout << endl << "level order traverse success." << endl;
+        return true;
+    }
+
+    int GetTreeLevel(Node* current)
+    {
+        if (current == NULL)
+        {
+            cout << "current node is null." << endl;
+            return 0;
+        }
+        else
+        {
+            int deep_left = GetTreeLevel(root->left);
+            int deep_right = GetTreeLevel(root->right);
+
+            int deep_size = 1 + max(deep_left, deep_right);
+            cout << endl << "get tree level with recursion. " + deep_size << endl;
+            return deep_size;
+        }
+    }
+
+    int GetTreeLevelNotRecursion()
+    {
+        int deep_size = 0;
+        int deep_left = 0;
+        int deep_right = 0;
+
+        if (root == NULL)
+        {
+            cout << "root node is null." << endl;
+            return deep_size;
+        }
+
+        queue<Node*> q;
+        Node *p = NULL;
+        q.push(root);
+
+        while (!q.empty())
+        {
+            p = q.front();
+            q.pop();
+
+            if (p->left != NULL)
+            {
+                q.push(p->left);
+                deep_left++;
+            }
+
+            if (p->right != NULL)
+            {
+                q.push(p->right);
+                deep_right++;
+            }
+        }
+
+        if (deep_left > deep_right)
+        {
+            deep_size += deep_left;
+        }
+        else
+        {
+            deep_size += deep_right;
+        }
+
+        cout << endl << "get tree level deep: " + deep_size << endl;
+        return deep_size;
+    }
 
     Node* SearchNodeByData(Node* current, DataType x)
     {
