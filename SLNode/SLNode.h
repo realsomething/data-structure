@@ -48,6 +48,7 @@ public:
             q = p;
             p = p->next;
             delete  q;//free(q);
+            q = NULL;
         }
     }
 
@@ -111,6 +112,7 @@ public:
         x = q->data;
         p->next = p->next->next;
         delete(q);
+        q = NULL;
         cout << "SLinkList delete data success." << endl;
 
         return true;
@@ -173,21 +175,22 @@ public:
             q = p;
             p = p->next;
             delete  q;//free(q);
+            q = NULL;
         }
     }
 
 
     // reverse the single link list
-    bool reverse_linklist()
+    SLinkList reverse_linklist()
     {
         SLinkList new_list;
-        Node *p = head;
+        //Node *p = head;
         Node *temp;
 
         if (head->next == NULL)
         {
             cout << "the original link list is empty." << endl;
-            return false;
+            exit(0);
         }
 
         new_list = SLinkList();
@@ -195,7 +198,7 @@ public:
         if (new_list.head == NULL)
         {
             cout << "create the new link list failed." << endl;
-            return false;
+            exit(0);
         }
 
         while (head->next != NULL)
@@ -207,13 +210,13 @@ public:
         }
 
 
-        p->next = new_list.head->next;  // link to the original link list
+        //p->next = new_list.head->next;  // link to the original link list
 
-        new_list.head->next = NULL;     // break to the new link list
+        //new_list.head->next = NULL;     // break to the new link list
 
         //delete new_list.head;
 
-        return true;
+        return new_list;
     }
 
 };

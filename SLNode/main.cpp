@@ -30,7 +30,7 @@ int main() {
     p = sLinkList.get_node(sLinkList.get_size() - 1);           // get the last
     cout << "last node: " << p->data << endl;
 
-    sLinkList.reverse_linklist();                       // reverse the link list
+    sLinkList = sLinkList.reverse_linklist();                       // reverse the link list
 
     sLinkList.print_linklist();
 
