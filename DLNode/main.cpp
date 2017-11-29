@@ -26,6 +26,9 @@ int main() {
     p = dLinkList.get_node(0);      cout << "first data: " << p->data << endl;
     p = dLinkList.get_node(dLinkList.get_size() - 1);   cout << "last data: " << p->data << endl;
 
+    dLinkList.reverse_linklist();
+
+    dLinkList.print_linklist();
 
     return 0;
 }

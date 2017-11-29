@@ -60,7 +60,7 @@ public:
 
     void create_list_head()
     {
-        for (int i=0; i<10; ++i)
+        for (int i=0; i<5; ++i)
         {
             insert_pos(rand() % 100, 0);
         }
@@ -183,14 +183,14 @@ public:
         cout << endl;
     }
 
-    // reverse the single link list
+    // reverse the double link list
     bool reverse_linklist()
     {
         DLinkList new_list;
         Node *p = head;
         Node *temp;
 
-        if (head->next == NULL)
+        if (head->next == head)
         {
             cout << "the original link list is empty." << endl;
             return false;
@@ -204,12 +204,33 @@ public:
             return false;
         }
 
-        while (head->next != NULL)
+        while (head->next != head)
         {
             temp = new_list.head->next;
-            new_list.head->next = head->next;
-            head->next = head->next->next;
+
+            if (head->next->next != head)
+            {
+                head->next->next->prior = head;
+                head->next->prior = new_list.head;
+
+                new_list.head->next = head->next;
+                head->next = head->next->next;
+            }
+            else        // the last node
+            {
+                head->next->prior = new_list.head;
+                new_list.head->next = head->next;
+
+                head->next = head;
+                head->prior = head;
+            }
+
             new_list.head->next->next = temp;
+
+            if (temp != new_list.head)
+            {
+                temp->prior = new_list.head->next;
+            }
         }
 
 
