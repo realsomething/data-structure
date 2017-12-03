@@ -12,7 +12,9 @@ int main() {
 
     order.print_data();
 
-    order.select_sort();
+    //order.select_sort();
+
+    order.insert_sort();
 
     order.print_data();
 
